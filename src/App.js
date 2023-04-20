@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = () => {
+    const todoText = document.querySelector('#todo-input').value;
+    setTodos([...todos, todoText]);
+  };
+
   return (
+    <div>     
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="input-container">
+        <input id="todo-input" type="text" />
+        <button onClick={addTodo}>추가하기</button>
+      </div>
+      <h1>Todo List</h1>
+      <div className="todos-container">
+        {todos.map((todo, index) => (
+          <div className="todo-item" key={index}>
+            {todo}
+          </div>
+        ))}
+      </div>
     </div>
+    </div> 
   );
 }
 
